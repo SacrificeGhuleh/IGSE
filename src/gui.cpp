@@ -2,10 +2,10 @@
 // Created by zvone on 28-Nov-19.
 //
 
-#include "includes/gui.h"
-#include "imgui.h"
-#include "imgui_impl_glfw.h"
-#include "imgui_impl_opengl3.h"
+#include <gui.h>
+#include <imgui.h>
+#include <imgui_impl_glfw.h>
+#include <imgui_impl_opengl3.h>
 
 // #define IMGUI_IMPL_OPENGL_LOADER_GL3W 1
 

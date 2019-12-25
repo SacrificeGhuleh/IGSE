@@ -8,8 +8,8 @@
 #include <mutex>
 #include <atomic>
 
-#include "includes/gui.h"
-#include "includes/gpuimage.h"
+#include <gui.h>
+#include <gpuimage.h>
 
 class NxpCarInterface : public Gui {
 public:
