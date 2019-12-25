@@ -1,26 +1,29 @@
 cmake_minimum_required(VERSION 3.15)
-project(ImGui_Simple_Engine)
+project(IGSE)
 
 set(CMAKE_CXX_STANDARD 17)
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-attributes")
 set(CMAKE_CXX_FLAGS_RELEASE "-O3")
-
-#set(CMAKE_CXX_FLAGS "-Wall -Wextra")
 set(CMAKE_CXX_FLAGS_DEBUG "-g")
-set(CMAKE_CXX_FLAGS_RELEASE "-O3")
+#set(CMAKE_CXX_FLAGS "-Wall -Wextra")
 
-set(SRC_ROOT src/engine)
-set(LIB_ROOT src/libs)
-set(EXAMPLE_ROOT src/example)
-set(IMGUI_ROOT ${LIB_ROOT}/imgui)
-set(GLM_ROOT ${LIB_ROOT}/glm)
-set(GL3W_ROOT ${LIB_ROOT}/gl3w)
-set(GLFW_ROOT ${LIB_ROOT}/glfw)
-set(STB_ROOT ${LIB_ROOT}/stb)
+set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
-include_directories(${SRC_ROOT})
-include_directories(${EXAMPLE_ROOT})
+set(IGSE_SRC_ROOT src)
+set(IGSE_INCLUDES_ROOT include)
+set(IGSE_LIBS_ROOT libs)
+set(IGSE_EXAMPLES_ROOT examples)
+
+set(IMGUI_ROOT ${IGSE_LIBS_ROOT}/imgui)
+set(GLM_ROOT ${IGSE_LIBS_ROOT}/glm)
+set(GL3W_ROOT ${IGSE_LIBS_ROOT}/gl3w)
+set(GLFW_ROOT ${IGSE_LIBS_ROOT}/glfw)
+set(STB_ROOT ${IGSE_LIBS_ROOT}/stb)
+
+include_directories(${IGSE_SRC_ROOT})
+include_directories(${IGSE_INCLUDES_ROOT})
+include_directories(${IGSE_EXAMPLES_ROOT})
 include_directories(${IMGUI_ROOT})
 include_directories(${IMGUI_ROOT}/examples)
 include_directories(${GLM_ROOT})
@@ -32,7 +35,7 @@ add_subdirectory(${GLM_ROOT})
 add_subdirectory(${GL3W_ROOT})
 add_subdirectory(${GLFW_ROOT})
 
-set(IMGUI
+set(IMGUI_SRC
     ${IMGUI_ROOT}/imgui.cpp
     ${IMGUI_ROOT}/imgui.h
     ${IMGUI_ROOT}/imgui_demo.cpp
@@ -49,41 +52,42 @@ set(IMGUI
     ${IMGUI_ROOT}/examples/imgui_impl_glfw.h
     )
 
-set(GL3W
+set(GL3W_SRC
     ${GL3W_ROOT}/src/gl3w.c
     )
 
-set(SOURCE
-    ${SRC_ROOT}/gui.cpp
-    ${SRC_ROOT}/gui.h
-    ${SRC_ROOT}/pixel.h
-    ${SRC_ROOT}/mat.h
-    ${SRC_ROOT}/gpuimage.h
+set(IGSE_HEADERS
+    ${IGSE_INCLUDES_ROOT}/gui.h
+    ${IGSE_INCLUDES_ROOT}/pixel.h
+    ${IGSE_INCLUDES_ROOT}/mat.h
+    ${IGSE_INCLUDES_ROOT}/gpuimage.h
     )
 
-set(CMAKE_INCLUDE_CURRENT_DIR ON)
+set(IGSE_SOURCES
+    ${IGSE_SRC_ROOT}/gui.cpp
+    )
+
+set(IGSE_EXAMPLE_SOURCES
+    ${IGSE_EXAMPLES_ROOT}/main.cpp
+    ${IGSE_EXAMPLES_ROOT}/nxpcarinterface.cpp
+    ${IGSE_EXAMPLES_ROOT}/nxpcarinterface.h
+    )
+
 
 add_library(${PROJECT_NAME}
-            ${SOURCE}
-            ${IMGUI}
-            ${GL3W}
+            ${IGSE_SOURCES}
+            ${IGSE_HEADERS}
+            ${IMGUI_SRC}
+            ${GL3W_SRC}
             )
+
+add_executable(${PROJECT_NAME}_Example ${IGSE_EXAMPLE_SOURCES})
 
 target_link_libraries(${PROJECT_NAME} PUBLIC glfw ${GLFW_LIBRARIES})
 
-set(EXAMPLE
-    ${EXAMPLE_ROOT}/main.cpp
-    ${EXAMPLE_ROOT}/nxpcarinterface.cpp
-    ${EXAMPLE_ROOT}/nxpcarinterface.h
-    )
-
 find_package(OpenMP REQUIRED)
-
-add_executable(${PROJECT_NAME}_Example ${EXAMPLE})
-
 if (OpenMP_CXX_FOUND)
-  target_link_libraries(${PROJECT_NAME}_Example PUBLIC ImGui_Simple_Engine OpenMP::OpenMP_CXX)
+  target_link_libraries(${PROJECT_NAME}_Example PUBLIC IGSE OpenMP::OpenMP_CXX)
 else ()
-  target_link_libraries(${PROJECT_NAME}_Example PUBLIC ImGui_Simple_Engine)
+  target_link_libraries(${PROJECT_NAME}_Example PUBLIC IGSE)
 endif ()
-

@@ -1,15 +1,15 @@
-[submodule "src/libs/imgui"]
-	path = src/libs/imgui
+[submodule "libs/imgui"]
+	path = libs/imgui
 	url = https://github.com/ocornut/imgui.git
-[submodule "src/libs/glm"]
-	path = src/libs/glm
+[submodule "libs/glm"]
+	path = libs/glm
 	url = https://github.com/g-truc/glm.git
-[submodule "src/libs/glfw"]
-	path = src/libs/glfw
+[submodule "libs/glfw"]
+	path = libs/glfw
 	url = https://github.com/glfw/glfw.git
-[submodule "src/libs/gl3w"]
-	path = src/libs/gl3w
+[submodule "libs/gl3w"]
+	path = libs/gl3w
 	url = https://github.com/skaslev/gl3w.git
-[submodule "src/libs/stb"]
-	path = src/libs/stb
+[submodule "libs/stb"]
+	path = libs/stb
 	url = https://github.com/nothings/stb.git

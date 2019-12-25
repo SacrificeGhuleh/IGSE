@@ -2,7 +2,7 @@
 // Created by zvone on 28-Nov-19.
 //
 
-#include "gui.h"
+#include "includes/gui.h"
 #include "imgui.h"
 #include "imgui_impl_glfw.h"
 #include "imgui_impl_opengl3.h"

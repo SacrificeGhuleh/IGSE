@@ -6,7 +6,7 @@
 
 #ifndef NDEBUG
 #include <iostream>
-#include "mat.h"
+#include "includes/mat.h"
 
 #endif //NDEBUG
 
