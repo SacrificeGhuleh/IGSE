@@ -21,7 +21,6 @@ void Example::initTextures() {
 
 //  originalImage_ = new GpuImage<200,200,3>("Example random noise image");
   originalImage_ = std::make_unique<GpuImage<200, 200, 3>>("Example random noise image");
-  
 }
 
 void Example::render() {
