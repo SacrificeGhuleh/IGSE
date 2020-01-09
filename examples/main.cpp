@@ -1,12 +1,12 @@
 // dear imgui - standalone example application for DirectX 11
 // If you are new to dear imgui, see examples/README.txt and documentation at the top of imgui.cpp.
 
-#include "nxpcarinterface.h"
+#include "example.h"
 
 
 #ifndef NDEBUG
 #include <iostream>
-#include "includes/mat.h"
+#include <mat.h>
 
 #endif //NDEBUG
 
@@ -18,7 +18,7 @@ int main(int, char **) {
   testMats();
 #endif //NDEBUG
   
-  NxpCarInterface gui;
+  Example gui;
   
   gui.render();
   

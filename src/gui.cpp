@@ -14,13 +14,15 @@
 //  Helper libraries are often used for this purpose! Here we are supporting a few common ones (gl3w, glew, glad).
 //  You may use another loader/header of your choice (glext, glLoadGen, etc.), or chose to manually implement your own.
 #if defined(IMGUI_IMPL_OPENGL_LOADER_GL3W)
+  
   #include <GL/gl3w.h>    // Initialize with gl3wInit()
+
 #elif defined(IMGUI_IMPL_OPENGL_LOADER_GLEW)
   #include <GL/glew.h>    // Initialize with glewInit()
 #elif defined(IMGUI_IMPL_OPENGL_LOADER_GLAD)
   #include <glad/glad.h>  // Initialize with gladLoadGL()
 #else
-  
+
   #include IMGUI_IMPL_OPENGL_LOADER_CUSTOM
 
 #endif
@@ -174,6 +176,11 @@ Gui::~Gui() {
 }
 
 void Gui::render() {
+  preRenderInit();
+  renderLoop();
+}
+
+void Gui::preRenderInit() {
   IMGUI_CHECKVERSION();
   ImGui::CreateContext();
   ImGuiIO &io = ImGui::GetIO();
@@ -202,9 +209,10 @@ void Gui::render() {
   
   // Our state
   initTextures();
-  
-  
-  // Main loop
+}
+
+void Gui::renderLoop() {
+// Main loop
   while (!glfwWindowShouldClose(window)) {
     // Poll and handle events (inputs, window resize, etc.)
     // You can read the io.WantCaptureMouse, io.WantCaptureKeyboard flags to tell if dear imgui wants to use your inputs.
@@ -266,8 +274,6 @@ void Gui::render() {
     }
     //Ui routine to be overriden in child class
     
-    
-    
     ui();
     
     // Rendering
@@ -282,7 +288,7 @@ void Gui::render() {
     // Update and Render additional Platform Windows
     // (Platform functions may change the current OpenGL context, so we save/restore it to make it easier to paste this code elsewhere.
     //  For this specific demo app we could also call glfwMakeContextCurrent(window) directly)
-    if (io.ConfigFlags & ImGuiConfigFlags_ViewportsEnable) {
+    if (ImGui::GetIO().ConfigFlags & ImGuiConfigFlags_ViewportsEnable) {
       GLFWwindow *backup_current_context = glfwGetCurrentContext();
       ImGui::UpdatePlatformWindows();
       ImGui::RenderPlatformWindowsDefault();

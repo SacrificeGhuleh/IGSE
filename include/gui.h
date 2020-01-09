@@ -26,6 +26,9 @@ protected:
   virtual void ui();
   
   virtual void initTextures() {}
+  
+  virtual void preRenderInit();
+  virtual void renderLoop();
 
 private:
   void init();
@@ -37,7 +40,6 @@ private:
   const char *glsl_version;
   
   static void glfw_error_callback(int error, const char *description);
-
 };
 
 

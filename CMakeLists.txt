@@ -69,8 +69,8 @@ set(IGSE_SOURCES
 
 set(IGSE_EXAMPLE_SOURCES
     ${IGSE_EXAMPLES_ROOT}/main.cpp
-    ${IGSE_EXAMPLES_ROOT}/nxpcarinterface.cpp
-    ${IGSE_EXAMPLES_ROOT}/nxpcarinterface.h
+    ${IGSE_EXAMPLES_ROOT}/example.cpp
+    ${IGSE_EXAMPLES_ROOT}/example.h
     )
 
 

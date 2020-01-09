@@ -11,11 +11,11 @@
 #include <gui.h>
 #include <gpuimage.h>
 
-class NxpCarInterface : public Gui {
+class Example : public Gui {
 public:
-  NxpCarInterface() : Gui("Nxp Car Interface") {};
+  Example() : Gui("Example GUI") {};
   
-  virtual ~NxpCarInterface() = default;
+  virtual ~Example() = default;
   
   virtual void render() override;
 
@@ -31,6 +31,8 @@ private:
   std::mutex tex_data_lock_;
   
   std::atomic<bool> finish_request_{false};
+//  GpuImage<200,200,3>* originalImage_;
+  std::unique_ptr<GpuImage<200,200,3>> originalImage_;
 };
 
 

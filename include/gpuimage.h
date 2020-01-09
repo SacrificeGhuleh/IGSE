@@ -5,7 +5,7 @@
 #ifndef NXPCARINTERFACE_GPUIMAGE_H
 #define NXPCARINTERFACE_GPUIMAGE_H
 
-#include "mat.h"
+#include <mat.h>
 
 #include "imgui.h"
 #include "imgui_impl_glfw.h"
