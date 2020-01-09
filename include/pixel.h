@@ -18,6 +18,8 @@ union Pixel<3> {
   
   Pixel(uint8_t _r, uint8_t _g, uint8_t _b) : r(_r), g(_g), b(_b) {}
   
+  Pixel(uint8_t _rgb) : r(_rgb), g(_rgb), b(_rgb) {}
+  
   struct {
     uint8_t r;
     uint8_t g;
@@ -31,6 +33,7 @@ union Pixel<4> {
   Pixel() : r(0), g(0), b(0), a(255) {}
   
   Pixel(uint8_t _r, uint8_t _g, uint8_t _b, uint8_t _a) : r(_r), g(_g), b(_b), a(_a) {}
+  Pixel(uint8_t _rgb, uint8_t _a = 255) : r(_rgb), g(_rgb), b(_rgb), a(_a) {}
   
   struct {
     uint8_t r;
@@ -39,7 +42,7 @@ union Pixel<4> {
     uint8_t a;
   };
   uint8_t data[4];
+  
 };
-
 
 #endif //NXPCARINTERFACE_PIXEL_H
