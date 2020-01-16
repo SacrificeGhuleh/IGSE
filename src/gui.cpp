@@ -207,7 +207,6 @@ void Gui::preRenderInit() {
   ImGui_ImplGlfw_InitForOpenGL(window, true);
   ImGui_ImplOpenGL3_Init(glsl_version);
   
-  // Our state
   initTextures();
 }
 
@@ -294,7 +293,6 @@ void Gui::renderLoop() {
       ImGui::RenderPlatformWindowsDefault();
       glfwMakeContextCurrent(backup_current_context);
     }
-    
     glfwSwapBuffers(window);
   }
 }

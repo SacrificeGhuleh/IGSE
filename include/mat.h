@@ -160,6 +160,7 @@ protected:
 private:
 };
 
+#ifndef NDEBUG
 static void testMats() {
   
   Mat<3, 3, 3> mat;
@@ -192,5 +193,5 @@ static void testMats() {
   auto rowMat = mat.getRowMat(2);
   rowMat.print();
 }
-
+#endif //NDEBUG
 #endif //NXPCARINTERFACE_MAT_H

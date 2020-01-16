@@ -54,14 +54,14 @@ public: //methods
   
   }
   
-  void render() {
+  void render(float scale = 1.f) {
     if (ImGui::Begin(name)) {
+      assert(scale > 0.f);
       //refresh and render only if not collapsed
       refresh();
       ImGui::Text("pointer = %p", getGpuTexturePtrId());
       ImGui::Text("size = %d x %d", this->width, this->height);
-      ImGui::Image((void *) (intptr_t) getGpuTexturePtrId(), ImVec2(this->width, this->height));
-      
+      ImGui::Image((void *) (intptr_t) getGpuTexturePtrId(), ImVec2(this->width * scale, this->height * scale));
     }
     ImGui::End();
   }
@@ -77,8 +77,8 @@ private: //methods
     glBindTexture(GL_TEXTURE_2D, gpuTexturePtrId);
     
     // Setup filtering parameters for display
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
     // Upload pixels into texture
     
     glPixelStorei(GL_UNPACK_ROW_LENGTH, 0);
@@ -98,8 +98,8 @@ private: //methods
     glBindTexture(GL_TEXTURE_2D, gpuTexturePtrId);
     
     // Setup filtering parameters for display
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
     // Upload pixels into texture
     
     glPixelStorei(GL_UNPACK_ROW_LENGTH, 0);
