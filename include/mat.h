@@ -70,6 +70,11 @@ public:
     delete[] data_;
   }
   
+  uint8_t &atRaw(const unsigned int index) {
+    assert(((void) "Index out of array", index < size));
+    return data_[index];
+  }
+  
   Pixel<T_CHANNELS> &at(const unsigned int index) {
     assert(((void) "Index out of array", index < pixels));
     return reinterpret_cast<Pixel<T_CHANNELS> &>(data_[index * T_CHANNELS]);
@@ -161,6 +166,7 @@ private:
 };
 
 #ifndef NDEBUG
+
 static void testMats() {
   
   Mat<3, 3, 3> mat;
@@ -193,5 +199,6 @@ static void testMats() {
   auto rowMat = mat.getRowMat(2);
   rowMat.print();
 }
+
 #endif //NDEBUG
 #endif //NXPCARINTERFACE_MAT_H
