@@ -18,6 +18,17 @@
 
 #include "pixel.h"
 
+inline unsigned int idx2dTo1d(unsigned int row, unsigned int col, unsigned int cols) {
+  return row * cols + col;
+}
+
+inline std::pair<unsigned int, unsigned int> idx1dTo2d(unsigned int idx, unsigned int cols){
+  unsigned int row = idx / cols;
+  unsigned int col = idx % cols;
+  
+  return std::pair<unsigned int, unsigned int>(row, col);
+}
+
 template<int T_ROWS, int T_COLS, int T_CHANNELS>
 class Mat {
 public:
@@ -71,11 +82,21 @@ public:
   }
   
   uint8_t &atRaw(const unsigned int index) {
+
+#ifndef NDEBUG
+    if(!(index < size))
+    std::cout << "Index out of array" << std::endl; // breakpoint here
+#endif //NDEBUG
+    
     assert(((void) "Index out of array", index < size));
     return data_[index];
   }
   
   Pixel<T_CHANNELS> &at(const unsigned int index) {
+    #ifndef NDEBUG
+    if(!(index < pixels))
+      std::cout << "Index out of array" << std::endl; // breakpoint here
+    #endif //NDEBUG
     assert(((void) "Index out of array", index < pixels));
     return reinterpret_cast<Pixel<T_CHANNELS> &>(data_[index * T_CHANNELS]);
   }
