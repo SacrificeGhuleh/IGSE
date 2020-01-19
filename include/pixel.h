@@ -8,7 +8,7 @@
 
 #include <cstdint>
 
-template<int T_CHANNELS>
+template<unsigned int T_CHANNELS>
 union Pixel {
 };
 
