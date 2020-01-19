@@ -29,7 +29,7 @@ inline std::pair<unsigned int, unsigned int> idx1dTo2d(unsigned int idx, unsigne
   return std::pair<unsigned int, unsigned int>(row, col);
 }
 
-template<int T_ROWS, int T_COLS, int T_CHANNELS>
+template<unsigned int T_ROWS, unsigned int T_COLS, unsigned int T_CHANNELS>
 class Mat {
 public:
   explicit Mat() :
